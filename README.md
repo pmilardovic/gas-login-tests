@@ -4,6 +4,9 @@
 
 Giphy is a website that enables users to explore and share website GIFs and most popular animated GIFs.
 
+##### In the repository there is a folder 'Documentation'. The folder contains detailed documentation about the project -> Test Plan, Test Cases and Jenkins Setup
+
+
 ## Development environment
 
 ## Java
@@ -95,6 +98,3 @@ For exporting test results to a different format click the 'Export Test Results'
 3. If you want to open the file in your browser after you export it, select the Open exported file in browser checkbox. Click OK.
 
 <img src="https://user-images.githubusercontent.com/18185475/97417425-f58c2500-1907-11eb-97da-b233b549d1fa.png" width="250" height="250">
-
-
-### In the repository there is a folder 'Documentation'. The folder contains detailed documentation about the project -> Test Plan, Test Cases and Jenkins Setup
