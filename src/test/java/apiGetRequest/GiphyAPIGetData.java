@@ -99,7 +99,7 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_GetGIFByInvalidID_ValidateResponseBody() {
-        String gifID = "pm2210?";
+        String gifID = "somerandomID?";
         String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + Constants.GIPHY_API_KEY;
 
         RequestSpecification httpRequest = RestAssured.given();
