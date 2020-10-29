@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="GiphyFunctionalTests" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-10-29T07:12:04" hostname="DESKTOP-UVGEF5C" time="80.969">
+  <properties/>
+  <testcase name="N_Login_InvalidEmailFormat" classname="GiphyFunctionalTests" time="8.165"/>
+  <testcase name="N_Search_NonExistingGifName" classname="GiphyFunctionalTests" time="4.065"/>
+  <testcase name="N_UploadCreate_NoLogin" classname="GiphyFunctionalTests" time="6.088"/>
+  <testcase name="N_Upload_InvalidGifByUrl" classname="GiphyFunctionalTests" time="15.403"/>
+  <testcase name="P_Login_SocialLogin" classname="GiphyFunctionalTests" time="5.55"/>
+  <testcase name="P_Navigate_MenuItems" classname="GiphyFunctionalTests" time="17.611"/>
+  <testcase name="P_ResetPasswordLink_ValidUser" classname="GiphyFunctionalTests" time="5.771"/>
+  <testcase name="P_SearchEnter_ExistingGifName" classname="GiphyFunctionalTests" time="4.922"/>
+  <testcase name="P_Search_ExistingGifName" classname="GiphyFunctionalTests" time="3.713"/>
+  <testcase name="P_Upload_ValidGifByUrl" classname="GiphyFunctionalTests" time="9.674"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Starting ChromeDriver 86.0.4240.22 (398b0743353ff36fb1b82468f63a3a93b4e2e89e-refs/branch-heads/4240@{#378}) on port 2988
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+lis 29, 2020 8:12:01 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+]]></system-err>
+</testsuite>
