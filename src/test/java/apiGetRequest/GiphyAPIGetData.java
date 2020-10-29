@@ -51,7 +51,7 @@ public class GiphyAPIGetData {
     public void N_InvalidApiKey_ValidateResponseBody() {
         String dummyAPIKey = "api_key=pm2210";
 
-        String invalidAPIUrl = Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + dummyAPIKey;
+        String invalidAPIUrl = Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?" + dummyAPIKey;
         String body = get(invalidAPIUrl).asString();
         System.out.println("Body is " + body);
         get(invalidAPIUrl).then().assertThat().body("message", Is.is(Constants.GIPHY_INVALID_CREDENTIALS_ERROR));
@@ -63,7 +63,7 @@ public class GiphyAPIGetData {
     @Test
     public void N_SearchNonExistingGif_ValidateResponseBody() {
         String nonExistingParamQ = "pm2210";
-        String invalidSearchRequest = Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH
+        String invalidSearchRequest = Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?"
                 + Constants.GIPHY_API_KEY + "&" + nonExistingParamQ;
 
         RequestSpecification httpRequest = RestAssured.given();
@@ -81,8 +81,8 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_GetGIFByID_ValidateResponseBody() {
-        String gifID = "sp685iuIEGuys?";
-        String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + Constants.GIPHY_API_KEY;
+        String gifID = "sp685iuIEGuys";
+        String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY;
 
         RequestSpecification httpRequest = RestAssured.given();
         Response response = httpRequest.request(Method.GET, getGIFByIDRequest);
@@ -99,8 +99,8 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_GetGIFByInvalidID_ValidateResponseBody() {
-        String gifID = "somerandomID?";
-        String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + Constants.GIPHY_API_KEY;
+        String gifID = "somerandomID";
+        String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY;
 
         RequestSpecification httpRequest = RestAssured.given();
         Response response = httpRequest.request(Method.GET, getGIFByIDRequest);
@@ -117,7 +117,7 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_GetGifCategories_ValidateResponseBody() {
-        String getGIFCategoriesRequest = Constants.GIPHY_BASE_URL + Constants.GIPHY_ENDPOINT_CATEG + Constants.GIPHY_API_KEY;
+        String getGIFCategoriesRequest = Constants.GIPHY_BASE_URL + Constants.GIPHY_ENDPOINT_CATEG + "?" + Constants.GIPHY_API_KEY;
 
         RequestSpecification httpRequest = RestAssured.given();
         Response response = httpRequest.request(Method.GET, getGIFCategoriesRequest);
