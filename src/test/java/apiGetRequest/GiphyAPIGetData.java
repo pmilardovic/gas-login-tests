@@ -81,15 +81,15 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_GetGIFByID_ValidateResponseBody() {
-        String gifID = "ikwPoLi821cIg?";
+        String gifID = "sp685iuIEGuys?";
         String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + Constants.GIPHY_API_KEY;
 
         RequestSpecification httpRequest = RestAssured.given();
         Response response = httpRequest.request(Method.GET, getGIFByIDRequest);
         response.then()
                 .assertThat()
-                .body("data.id", Is.is("ikwPoLi821cIg"))
-                .body("data.title", Is.is("oscars leo GIF"))
+                .body("data.id", Is.is("sp685iuIEGuys"))
+                .body("data.title", Is.is("gatsby GIF"))
                 .body("meta.status", Is.is(200))
                 .body("meta.msg", Is.is("OK"));
     }
