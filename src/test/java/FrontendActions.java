@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,6 +10,8 @@ public class FrontendActions extends TestBase {
 
     /**
      * This method is used for pausing the process for given seconds
+     * Stop the execution of the script for the specified duration of time,
+     * irrespective of whether the element is found or not on the web page
      */
     public void sleep(int sec) {
         try {
@@ -70,6 +71,7 @@ public class FrontendActions extends TestBase {
 
     /**
      * This method is used to focus(hover) on a specific element
+     * Actions class -> for handling keyboard and mouse events
      */
     public void elementFocus(String xpath) {
         WebElement element = driver.findElement(By.xpath(xpath));
@@ -78,4 +80,4 @@ public class FrontendActions extends TestBase {
         new Actions(driver).moveToElement(element).perform();
     }
 
-}
+    }

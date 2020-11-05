@@ -1,16 +1,11 @@
 package apiGetRequest;
 
 import io.restassured.RestAssured;
-import io.restassured.http.Headers;
-import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static io.restassured.RestAssured.get;
 
 public class GiphyAPIGetData {
 
@@ -19,11 +14,12 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_Search_ValidateResponseCode() {
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, Constants.validSearchRequest);
-        int statusCode = response.getStatusCode();
-        response.getStatusCode();
-        Assert.assertEquals(statusCode, 200);
+        RestAssured.
+                when().
+                get(Constants.validSearchRequest).
+                then().
+                assertThat().
+                statusCode(200);
     }
 
     /**
@@ -31,17 +27,20 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_Search_ValidateRequestHeaders() {
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, Constants.validSearchRequest);
-        Headers body = response.getHeaders();
-        System.out.println("Headers:" + body);
+        Response response = RestAssured.get(Constants.validSearchRequest);
 
-        String contentType = response.header("Content-type");
+        String contentType = response.getHeader("content-type");
         System.out.println("Content type is: " + contentType);
         Assert.assertEquals(contentType, "application/json");
 
-        String contentEncoding = response.header("Content-Encoding");
+        String contentEncoding = response.getHeader("content-Encoding");
         System.out.println("Content Encoding type is: " + contentEncoding);
+        Assert.assertEquals(contentEncoding, "gzip");
+
+        String cacheControl = response.getHeader("cache-control");
+        System.out.println("Cache-control is: " + cacheControl);
+        Assert.assertEquals(cacheControl, "max-age=30");
+
     }
 
     /**
@@ -50,11 +49,15 @@ public class GiphyAPIGetData {
     @Test
     public void N_InvalidApiKey_ValidateResponseBody() {
         String dummyAPIKey = "api_key=pm2210";
+        RestAssured.
+                when().
+                get(Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?" + dummyAPIKey).
+                then().
+                assertThat().
+                body("message", Is.is("Invalid authentication credentials"));
 
-        String invalidAPIUrl = Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?" + dummyAPIKey;
-        String body = get(invalidAPIUrl).asString();
-        System.out.println("Body is " + body);
-        get(invalidAPIUrl).then().assertThat().body("message", Is.is(Constants.GIPHY_INVALID_CREDENTIALS_ERROR));
+        //String body = RestAssured.get(Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?" + dummyAPIKey).asString();
+        //System.out.println("Body is " + body);
     }
 
     /**
@@ -63,17 +66,20 @@ public class GiphyAPIGetData {
     @Test
     public void N_SearchNonExistingGif_ValidateResponseBody() {
         String nonExistingParamQ = "pm2210";
-        String invalidSearchRequest = Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?"
-                + Constants.GIPHY_API_KEY + "&" + nonExistingParamQ;
-
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, invalidSearchRequest);
-        response.then()
+        RestAssured.
+                when().
+                get(Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?"
+                        + Constants.GIPHY_API_KEY + "&" + nonExistingParamQ).
+                then()
                 .assertThat()
                 .body("data", Matchers.hasSize(0))
                 .body("pagination.count", Is.is(0))
                 .body("meta.status", Is.is(200))
                 .body("meta.msg", Is.is("OK"));
+
+        //String body = RestAssured.get(Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?"
+        // + Constants.GIPHY_API_KEY + "&" + nonExistingParamQ).asString();
+        //System.out.println("Body is " + body);
     }
 
     /**
@@ -82,16 +88,19 @@ public class GiphyAPIGetData {
     @Test
     public void P_GetGIFByID_ValidateResponseBody() {
         String gifID = "sp685iuIEGuys";
-        String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY;
-
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, getGIFByIDRequest);
-        response.then()
+        RestAssured.given().
+                when().
+                get(Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY).
+                then()
                 .assertThat()
                 .body("data.id", Is.is("sp685iuIEGuys"))
                 .body("data.title", Is.is("gatsby GIF"))
                 .body("meta.status", Is.is(200))
                 .body("meta.msg", Is.is("OK"));
+
+        //String body = get(Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY).
+        //System.out.println("Body is " + body);
+
     }
 
     /**
@@ -100,15 +109,17 @@ public class GiphyAPIGetData {
     @Test
     public void P_GetGIFByInvalidID_ValidateResponseBody() {
         String gifID = "somerandomID";
-        String getGIFByIDRequest = Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY;
-
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, getGIFByIDRequest);
-        response.then()
+        RestAssured.given().
+                when().
+                get(Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY).
+                then()
                 .assertThat()
                 .body("data", Matchers.hasSize(0))
                 .body("meta.status", Is.is(404))
                 .body("meta.msg", Is.is("Not Found"));
+
+        //String body = get(Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY).
+        //System.out.println("Body is " + body);
     }
 
 
@@ -117,11 +128,10 @@ public class GiphyAPIGetData {
      */
     @Test
     public void P_GetGifCategories_ValidateResponseBody() {
-        String getGIFCategoriesRequest = Constants.GIPHY_BASE_URL + Constants.GIPHY_ENDPOINT_CATEG + "?" + Constants.GIPHY_API_KEY;
-
-        RequestSpecification httpRequest = RestAssured.given();
-        Response response = httpRequest.request(Method.GET, getGIFCategoriesRequest);
-        response.then()
+        RestAssured.given().
+                when().
+                get(Constants.GIPHY_BASE_URL + Constants.GIPHY_ENDPOINT_CATEG + "?" + Constants.GIPHY_API_KEY).
+                then()
                 .assertThat()
                 .body("pagination.total_count", Is.is(28))
                 .body("meta.status", Is.is(200))

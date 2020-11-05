@@ -2,7 +2,7 @@ import org.testng.annotations.Test;
 
 public class GiphyFunctionalTests extends FrontendActions {
 
-    private void LoginUser() {
+    private void loginUser() {
 
         clickButtonByXpath(Constants.GIPHY_LOGIN_BUTTON);
         fillInputFieldBySendKeys(Constants.GIPHY_LOGIN_EMAIL_FIELD, Constants.GIPHY_EMAIL);
@@ -11,7 +11,7 @@ public class GiphyFunctionalTests extends FrontendActions {
         validation.isTextPresent(Constants.GIPHY_USERNAME);
     }
 
-    private void LogoutUser() {
+    private void logoutUser() {
 
         validation.isTextPresent(Constants.GIPHY_USERNAME);
         elementFocus(Constants.GIPHY_LOGGED_USERNAME);
@@ -86,12 +86,12 @@ public class GiphyFunctionalTests extends FrontendActions {
     public void P_Upload_ValidGifByUrl() {
         navigateToPage(Constants.GIPHY_PAGE_URL);
         if (!validation.isTextPresent(Constants.GIPHY_USERNAME)) {
-            LoginUser();
+            loginUser();
         }
         clickButtonByXpath(Constants.GIPHY_UPLOAD_BUTTON);
         fillInputFieldBySendKeys(Constants.GIPHY_UPLOAD_URL, Constants.GIPHY_VALID_URL);
         validation.elementValueIsEqual(Constants.GIPHY_URL_FIELD, Constants.GIPHY_VALID_URL);
-        LogoutUser();
+        logoutUser();
     }
 
     /**
@@ -103,12 +103,12 @@ public class GiphyFunctionalTests extends FrontendActions {
     public void N_Upload_InvalidGifByUrl() {
         navigateToPage(Constants.GIPHY_PAGE_URL);
         if (!validation.isTextPresent(Constants.GIPHY_USERNAME)) {
-            LoginUser();
+            loginUser();
         }
         clickButtonByXpath(Constants.GIPHY_UPLOAD_BUTTON);
         fillInputFieldBySendKeys(Constants.GIPHY_UPLOAD_URL, helper.randomStringGenerator());
         validation.elementTextIsEqualByXpath(Constants.GIPHY_INVALID_URL_POPUP, Constants.GIPHY_UPLOAD_INVALID_URL_MESSAGE);
-        LogoutUser();
+        logoutUser();
     }
 
     /**
