@@ -1,3 +1,5 @@
+package functional;
+
 import org.testng.annotations.Test;
 
 public class GiphyFunctionalTests extends FrontendActions {
@@ -61,7 +63,7 @@ public class GiphyFunctionalTests extends FrontendActions {
     public void N_Login_InvalidEmailFormat() {
         navigateToPage(Constants.GIPHY_PAGE_URL);
         clickButtonByXpath(Constants.GIPHY_LOGIN_BUTTON);
-        fillInputFieldBySendKeys(Constants.GIPHY_LOGIN_EMAIL_FIELD, helper.randomSpecialCharsGenerator());
+        fillInputFieldBySendKeys(Constants.GIPHY_LOGIN_EMAIL_FIELD, helper.randomNumberGenerator());
         pressKeyboard(Constants.GIPHY_LOGIN_EMAIL_FIELD, "TAB");
         validation.elementTextIsEqualByXpath(Constants.GIPHY_INVALID_EMAIL_POPUP, Constants.INVALID_EMAIL);
     }
@@ -149,7 +151,6 @@ public class GiphyFunctionalTests extends FrontendActions {
         validation.isTextPresent("Reaction GIFs");
         fillInputFieldBySendKeys(Constants.GIPHY_SEARCH_FIELD, "Gatsby");
         clickButtonByXpath(Constants.GIPHY_SEARCH_BUTTON);
-        sleep(2);
         validation.isTextPresent("Gatsby GIFs");
         clickButtonByXpath(Constants.GIPHY_ENTERTAINMENT_MENU_ITEM);
         validation.isTextPresent("Entertainment GIFs");

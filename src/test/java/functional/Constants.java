@@ -1,3 +1,5 @@
+package functional;
+
 public class Constants {
 
     public static final String GIPHY_PAGE_URL = "https://giphy.com";

@@ -1,4 +1,4 @@
-package apiGetRequest;
+package api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -7,10 +7,10 @@ import org.hamcrest.core.Is;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class GiphyAPIGetData {
+public class GiphyAPITests {
 
     /**
-     * Entering valid parameters and validating response code.
+     * Sending valid API request and validating response code.
      */
     @Test
     public void P_Search_ValidateResponseCode() {
@@ -23,7 +23,7 @@ public class GiphyAPIGetData {
     }
 
     /**
-     * Entering valid parameters and validating response headers.
+     * Sending valid API request and validating response headers.
      */
     @Test
     public void P_Search_ValidateRequestHeaders() {
@@ -44,7 +44,7 @@ public class GiphyAPIGetData {
     }
 
     /**
-     * Entering invalid api key parameter and validating response body.
+     * Sending invalid api key parameter and validating response body.
      */
     @Test
     public void N_InvalidApiKey_ValidateResponseBody() {
@@ -56,12 +56,12 @@ public class GiphyAPIGetData {
                 assertThat().
                 body("message", Is.is("Invalid authentication credentials"));
 
-        //String body = RestAssured.get(Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?" + dummyAPIKey).asString();
+        //String body = RestAssured.get(functional.Constants.GIPHY_BASE_URL + functional.Constants.GIPY_ENDPOINT_SEARCH + "?" + dummyAPIKey).asString();
         //System.out.println("Body is " + body);
     }
 
     /**
-     * Entering invalid q parameter(non existing gif name) and validating response body.
+     * Sending invalid q parameter(non existing gif name) and validating response body.
      */
     @Test
     public void N_SearchNonExistingGif_ValidateResponseBody() {
@@ -77,13 +77,13 @@ public class GiphyAPIGetData {
                 .body("meta.status", Is.is(200))
                 .body("meta.msg", Is.is("OK"));
 
-        //String body = RestAssured.get(Constants.GIPHY_BASE_URL + Constants.GIPY_ENDPOINT_SEARCH + "?"
-        // + Constants.GIPHY_API_KEY + "&" + nonExistingParamQ).asString();
+        //String body = RestAssured.get(functional.Constants.GIPHY_BASE_URL + functional.Constants.GIPY_ENDPOINT_SEARCH + "?"
+        // + functional.Constants.GIPHY_API_KEY + "&" + nonExistingParamQ).asString();
         //System.out.println("Body is " + body);
     }
 
     /**
-     * Request GIF by valid ID and validate response body.
+     * Sending valid GIF ID and validate response body.
      */
     @Test
     public void P_GetGIFByID_ValidateResponseBody() {
@@ -98,13 +98,13 @@ public class GiphyAPIGetData {
                 .body("meta.status", Is.is(200))
                 .body("meta.msg", Is.is("OK"));
 
-        //String body = get(Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY).
+        //String body = get(functional.Constants.GIPHY_BASE_URL + gifID + "?" + functional.Constants.GIPHY_API_KEY).
         //System.out.println("Body is " + body);
 
     }
 
     /**
-     * Request GIF by invalid ID and validate response body.
+     * Sending invalid GIF ID and validate response body.
      */
     @Test
     public void P_GetGIFByInvalidID_ValidateResponseBody() {
@@ -118,13 +118,13 @@ public class GiphyAPIGetData {
                 .body("meta.status", Is.is(404))
                 .body("meta.msg", Is.is("Not Found"));
 
-        //String body = get(Constants.GIPHY_BASE_URL + gifID + "?" + Constants.GIPHY_API_KEY).
+        //String body = get(functional.Constants.GIPHY_BASE_URL + gifID + "?" + functional.Constants.GIPHY_API_KEY).
         //System.out.println("Body is " + body);
     }
 
 
     /**
-     * Request List of GIF categories
+     * Sending valid request for list of GIF categories and validating response body.
      */
     @Test
     public void P_GetGifCategories_ValidateResponseBody() {

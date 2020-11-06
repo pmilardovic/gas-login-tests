@@ -1,3 +1,5 @@
+package functional;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -7,19 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FrontendActions extends TestBase {
 
-
-    /**
-     * This method is used for pausing the process for given seconds
-     * Stop the execution of the script for the specified duration of time,
-     * irrespective of whether the element is found or not on the web page
-     */
-    public void sleep(int sec) {
-        try {
-            Thread.sleep(sec * 1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * This method is for navigating to a specific page via url
@@ -80,4 +69,4 @@ public class FrontendActions extends TestBase {
         new Actions(driver).moveToElement(element).perform();
     }
 
-    }
+}
