@@ -18,10 +18,10 @@ public class Validation {
     /**
      * This method is used to validate whether the text of the element and expected text are equal
      */
-    public void elementTextIsEqualByXpath(String xpath, String expectedText) {
-        WebElement element = driver.findElement(By.xpath(xpath));
+    public void elementTextIsEqualById(String id, String expectedText) {
+        WebElement element = driver.findElement(By.id(id));
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
         String text = element.getText();
         Assert.assertEquals(text, expectedText);
     }
